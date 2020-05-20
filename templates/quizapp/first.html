@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quizpage</title>
+</head>
+<body>
+   <h1>{{q}}</h1> 
+   <form action="/addscore" method="post">
+    {% csrf_token %}
+    {% for choice in ques.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{choice.choice_text}}</label><br>
+    {% endfor %}
+    <input type="submit" value="next">
+    </form>
+    <p>{{error}}</p>
+</body>
+</html>
